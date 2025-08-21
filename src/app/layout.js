@@ -26,8 +26,8 @@ export default function RootLayout({ children }) {
             pauseOnHover
             theme="light"
           />
-          <main className="pt-10 max-h-screen">{children}</main>
-          {/* <Footer /> */}
+           <main className="flex-grow pt-10  min-h-screen">{children}</main>
+          <Footer />
        
       </body>
       </NextAuthProvider>
