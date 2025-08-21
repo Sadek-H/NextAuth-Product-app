@@ -1,8 +1,14 @@
 "use client";
-import { useState } from "react";
+
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function AddProductPage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const [authorized, setAuthorized] = useState(false);
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -11,9 +17,20 @@ export default function AddProductPage() {
     category: "",
     rating: "",
     stock: "",
-    image: ""
+    image: "",
   });
   const [loading, setLoading] = useState(false);
+
+  // Wait until session is loaded, then check
+  useEffect(() => {
+    if (status === "loading") return; // wait for session
+    if (status === "unauthenticated") {
+      toast.error("You must be logged in to access this page");
+      router.push("/"); // redirect immediately
+    } else {
+      setAuthorized(true); // user is logged in, show form
+    }
+  }, [status, router]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -22,7 +39,6 @@ export default function AddProductPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     try {
       const res = await fetch("/api/products", {
         method: "POST",
@@ -31,10 +47,9 @@ export default function AddProductPage() {
           ...form,
           price: parseFloat(form.price),
           rating: parseFloat(form.rating),
-          stock: parseInt(form.stock)
+          stock: parseInt(form.stock),
         }),
       });
-
       const data = await res.json();
       if (res.ok) {
         toast.success(data.message);
@@ -46,18 +61,21 @@ export default function AddProductPage() {
           category: "",
           rating: "",
           stock: "",
-          image: ""
+          image: "",
         });
       } else {
-        alert("Error: " + data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.error(error);
-      alert("Something went wrong");
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }
   };
+
+  // Do not render form until authorized
+  if (!authorized) return null;
 
   return (
     <div className="max-w-lg mx-auto bg-white p-6 rounded-xl shadow mt-10">
