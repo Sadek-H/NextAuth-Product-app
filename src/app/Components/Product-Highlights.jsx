@@ -6,7 +6,7 @@ const ProductHighlights = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("/products.json")
+    fetch("/api/products")
       .then((res) => res.json())
       .then((data) => setProducts(data.slice(0, 3)));
   }, []);
@@ -21,7 +21,7 @@ const ProductHighlights = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {products.slice(0, 3).map((product) => (
             <div
-              key={product.id}
+              key={product._id}
               className="bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden border border-gray-100 dark:border-gray-700"
             >
               <div className="p-6 flex flex-col justify-between h-full">

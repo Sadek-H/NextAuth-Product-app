@@ -1,18 +1,20 @@
 "use client"
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 
 const ProductDetailsPage = ({ params }) => {
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const id = params.id;
+  const id =  React.use(params).id; 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch("/products.json");
+        const res = await fetch("/api/products");
         if (!res.ok) throw new Error("Failed to fetch product");
         const data = await res.json();
-        const foundProduct = data.find((p)=> p.id == id);
+        console.log(data);
+        const foundProduct = data.find((p)=> p._id = id);
+        console.log(foundProduct);
         setProduct(foundProduct);
       } catch (err) {
         setError(err.message);
@@ -21,7 +23,7 @@ const ProductDetailsPage = ({ params }) => {
       }
     };
     fetchProduct();
-  }, [params.id]);
+  }, [id]);
 
   if (loading) return <div style={{ textAlign: "center", marginTop: 50 }}>Loading...</div>;
   if (error) return <div style={{ textAlign: "center", marginTop: 50, color: "red" }}>Error: {error}</div>;
