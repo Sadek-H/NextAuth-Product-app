@@ -12,9 +12,9 @@ const ProductDetailsPage = ({ params }) => {
         const res = await fetch("/api/products");
         if (!res.ok) throw new Error("Failed to fetch product");
         const data = await res.json();
-        console.log(data);
+       // console.log(data);
         const foundProduct = data.find((p)=> p._id = id);
-        console.log(foundProduct);
+       // console.log(foundProduct);
         setProduct(foundProduct);
       } catch (err) {
         setError(err.message);

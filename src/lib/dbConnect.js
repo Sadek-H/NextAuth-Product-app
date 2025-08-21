@@ -1,15 +1,31 @@
-import { MongoClient, ServerApiVersion } from "mongodb"
+import { MongoClient, ServerApiVersion } from "mongodb";
 
-export default function Dbconnect (collectionName){
-    const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.t5n91s9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
+let client;
+let clientPromise;
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.t5n91s9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+
+if (!process.env.DB_USER || !process.env.DB_PASS) {
+  throw new Error("Please add DB_USER and DB_PASS to environment variables");
+}
+
+// For serverless (Vercel) reuse the client
+if (process.env.NODE_ENV === "development") {
+  if (!global._mongoClientPromise) {
+    client = new MongoClient(uri, {
+      serverApi: { version: ServerApiVersion.v1, strict: true, deprecationErrors: true },
+    });
+    global._mongoClientPromise = client.connect();
   }
-});
-return client.db("products-nextjs").collection(collectionName);
+  clientPromise = global._mongoClientPromise;
+} else {
+  client = new MongoClient(uri, {
+    serverApi: { version: ServerApiVersion.v1, strict: true, deprecationErrors: true },
+  });
+  clientPromise = client.connect();
+}
 
+export default async function Dbconnect(collectionName) {
+  const client = await clientPromise;
+  return client.db("products-nextjs").collection(collectionName);
 }
