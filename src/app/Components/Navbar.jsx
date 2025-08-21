@@ -17,6 +17,12 @@ export default function Navbar() {
         {/* Desktop Links */}
         <div className="hidden md:flex space-x-6 items-center">
           <Link
+            href="/"
+            className="text-white hover:text-yellow-300 font-medium transition-colors duration-300"
+          >
+            Home
+          </Link>
+          <Link
             href="/products"
             className="text-white hover:text-yellow-300 font-medium transition-colors duration-300"
           >

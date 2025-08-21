@@ -1,0 +1,69 @@
+[
+  {
+    "id": 1,
+    "name": "iPhone 15 Pro",
+    "description": "Latest Apple iPhone with A17 chip, Dynamic Island, and 48MP camera",
+    "price": 1200,
+    "brand": "Apple",
+    "category": "Smartphone",
+    "rating": 4.8,
+    "stock": 25,
+    "image": "https://i.postimg.cc/gkNmgqj0/realistic-smartphone-device-52683-29765.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Samsung Galaxy S24",
+    "description": "Flagship Samsung smartphone with Snapdragon Gen 3 and 200MP camera",
+    "price": 1100,
+    "brand": "Samsung",
+    "category": "Smartphone",
+    "rating": 4.7,
+    "stock": 30,
+    "image": "https://i.postimg.cc/c4Y5HsyG/realistic-smartphone-with-back-illustration-174496-703.jpg"
+  },
+  {
+    "id": 3,
+    "name": "MacBook Air M3",
+    "description": "Lightweight laptop with Apple silicon M3 chip and 18-hour battery life",
+    "price": 1500,
+    "brand": "Apple",
+    "category": "Laptop",
+    "rating": 4.9,
+    "stock": 15,
+    "image": "https://i.postimg.cc/kgHcFzdv/modern-office-desk-composition-with-technological-device-23-2147915817.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Dell XPS 15",
+    "description": "Premium Windows laptop with Intel i9, RTX 4070, and 4K OLED display",
+    "price": 2200,
+    "brand": "Dell",
+    "category": "Laptop",
+    "rating": 4.6,
+    "stock": 10,
+    "image": "https://i.postimg.cc/kXqqqYzs/image.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Sony WH-1000XM5",
+    "description": "Noise-cancelling wireless headphones with 30-hour battery life",
+    "price": 400,
+    "brand": "Sony",
+    "category": "Headphones",
+    "rating": 4.9,
+    "stock": 40,
+    "image": "https://i.postimg.cc/GhWP4YPX/image.jpg"
+  },
+  {
+    "id": 6,
+    "name": "iPad Pro 12.9",
+    "description": "Apple iPad Pro with M2 chip, Liquid Retina XDR display, and Apple Pencil support",
+    "price": 1300,
+    "brand": "Apple",
+    "category": "Tablet",
+    "rating": 4.8,
+    "stock": 20,
+    "image": "https://i.postimg.cc/k4H6k3fT/image.jpg"
+  }
+  
+]
